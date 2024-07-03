@@ -37,14 +37,17 @@ fclean : clean
 re : fclean all
 
 copy :
-	cp -r Makefile includes srcs $(GITHUB_FOLDER_NAME)
+	@cp -r Makefile includes srcs $(GITHUB_FOLDER_NAME)
+	@echo "$(SKY) The content copied in git repo $(RESET)"
 
 clone :
-	git clone $(GITHUB) $(GITHUB_FOLDER_NAME)
+	@git clone $(GITHUB) $(GITHUB_FOLDER_NAME)
+	@echo "$(SKY) Git repo cloned $(RESET)"
 
 push :
-	git add .
-	git commit -m "something done"
-	git push
+	@git add .
+	@git commit -m "something done"
+	@git push
+	@echo "$(SKY) Pushed $(RESET)"
 
-.PHONY : all clean fclean re push
+.PHONY : all clean fclean re push copy clone

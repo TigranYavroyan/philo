@@ -7,7 +7,6 @@ SKY		= \033[1;36m
 GITHUB = git@github.com:TigranYavroyan/philo.git
 GITHUB_FOLDER_NAME = chlp
 
-
 CC = gcc
 SRCSPATH = ./srcs/
 INCLPATH = ./includes/

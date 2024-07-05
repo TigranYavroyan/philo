@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 20:33:29 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/07/05 21:27:14 by tyavroya         ###   ########.fr       */
+/*   Created: 2024/07/05 20:24:59 by tyavroya          #+#    #+#             */
+/*   Updated: 2024/07/05 21:26:36 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-int main(int argc, char** argv) {
-	t_table table;
+bool is_digit(char ch) {
+	return (ch >= '0' && ch <= '9');
+}
 
-	if (argc != 5 && argc != 6)
-		_err("Invalid amount of arguments");
+bool is_whitespace(char ch) {
+	return  (ch == ' ' || ch == '\t' || ch == '\r'
+		|| ch == '\n' || ch == '\v' || ch == '\f');
+}
 
-	parse(&table, argv);
+int	ft_strlen(const char* str) {
+	int count;
+
+	count = 0;
+	while (str && *str) {
+		++count;
+		++str;
+	}
+	return count;
+}
+
+void print_with_color(const char* msg, const char* color) {
+	printf("%s%s%s\n", color, msg, RESET);
 }

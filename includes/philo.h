@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:16:29 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/07/08 17:39:14 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:05:36 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void					__init__(t_table *table);
 
 // exit.c
 void					_err(const char *msg);
+void					_dealloc(t_table *table);
 
 // helpers.c
 bool					is_digit(char ch);

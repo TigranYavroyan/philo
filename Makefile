@@ -12,7 +12,7 @@ SRCSPATH = ./srcs/
 INCLPATH = ./includes/
 SRCS = $(wildcard $(SRCSPATH)*.c)
 OBJS = $(patsubst $(SRCSPATH)%.c, $(SRCSPATH)%.o, $(SRCS))
-CFLAGS = -Wall -Wextra -Werror $(foreach H, $(INCLPATH), -I$(H))
+CFLAGS = $(foreach H, $(INCLPATH), -I$(H)) #-Wall -Wextra -Werror
 NAME = philo
 
 all : $(NAME)
@@ -29,11 +29,15 @@ clean :
 	@rm -f $(OBJS)
 	@echo "$(RED) Object files have been deleted $(RESET)"
 
-fclean : clean
+fclean : clean grm
 	@rm -f $(NAME)
 	@echo "$(RED) Executable file has been deleted $(RESET)"
 
 re : fclean all
+
+grm :
+	@rm -rf $(GITHUB_FOLDER_NAME)
+	@echo "$(RED) Git repo removed $(RESET)"
 
 copy :
 	@cp -r Makefile includes srcs $(GITHUB_FOLDER_NAME)
@@ -49,4 +53,4 @@ push :
 	@git push
 	@echo "$(SKY) Pushed $(RESET)"
 
-.PHONY : all clean fclean re push copy clone
+.PHONY : all clean fclean re push copy clone grm

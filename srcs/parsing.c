@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 20:09:51 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/07/08 16:34:53 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:08:18 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,12 @@ long	ft_atol(const char *str)
 	return (num);
 }
 
-//			1  2   3   4   5
-// ./philo 5 100 100 100 {4}
-
 void	parse(t_table *table, char **argv)
 {
 	table->philo_nbr = ft_atol(argv[1]);
-	table->time_to_die = ft_atol(argv[2]) * MILLISECONDS;
-	table->time_to_eat = ft_atol(argv[3]) * MILLISECONDS;
-	table->time_to_sleep = ft_atol(argv[4]) * MILLISECONDS;
+	table->time_to_die = ft_atol(argv[2]) * 1e3;
+	table->time_to_eat = ft_atol(argv[3]) * 1e3;
+	table->time_to_sleep = ft_atol(argv[4]) * 1e3;
 
 	if (table->time_to_die < MIN_TIMESTAMP || table->time_to_eat < MIN_TIMESTAMP
 		|| table->time_to_sleep < MIN_TIMESTAMP)

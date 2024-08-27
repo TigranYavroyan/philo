@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:16:29 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/07/08 19:05:36 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:17:06 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # define SKY "\033[1;36m"
 # define RESET "\033[0m"
 # define MIN_TIMESTAMP 60000
-# define MILLISECONDS 1000
 
 # include <errno.h>
 # include <limits.h>
@@ -46,6 +45,11 @@ typedef enum e_opcode
 	JOIN,
 	DETACH,
 }						t_opcode;
+
+typedef enum e_time_code {
+	MILLISECONDS,
+	MICROSECONDS,
+}			t_time_code;
 
 typedef struct s_table	t_table;
 typedef pthread_mutex_t	t_mutex;
@@ -78,6 +82,8 @@ struct					s_table
 	long				meals_nbr;
 	long				simulation_start;
 	bool				end_simulation;
+	bool				all_threads_ready;
+	t_mutex				table_mutex;
 	t_fork				*forks;
 	t_philo				*philos;
 };
@@ -99,11 +105,27 @@ void					print_with_color(const char *msg, const char *color);
 long					ft_atol(const char *str);
 void					parse(t_table *table, char **argv);
 
+// dinner.c
+void					*dinner_simulation(void *data);
+void					dinner_start(t_table *table);
+
+// get_set.c
+bool					get_bool(t_mutex *mutex, bool *val);
+void					set_bool(t_mutex *mutex, bool *dest, bool val);
+long					get_long(t_mutex *mutex, long *val);
+void					set_long(t_mutex *mutex, long *dest, long val);
+bool					simulation_finished(t_table *table);
+
 // safe functions.c
 void					*__attribute__((malloc,
 								warn_unused_result)) _safe_malloc(size_t bytes);
-void					_safe_mutex_handle(t_mutex *mtx, t_opcode opcode);
+void					safe_mutex_handle(t_mutex *mtx, t_opcode opcode);
 void					safe_thread_handle(pthread_t *thread, t_fptr foo,
 							void *data, t_opcode code);
+
+// utils.c
+void					wait_all_threads(t_table *table);
+long					gettime (t_time_code time_code);
+void					ft_usleep (long usec, t_table *table);
 
 #endif // PHILO_H

@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:37:42 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/07/08 19:36:26 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:36:30 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	safe_thread_handle(pthread_t *thread, t_fptr foo, void *data,
 		_err("Wrong code for thread_handle: use <CREATE> <JOIN> <DETACH>");
 }
 
-// don't deallocing the table memory , check after
 static void	handle_mutex_error(int status, t_opcode code)
 {
 	if (EINVAL == status && (LOCK == code || UNLOCK == code))
@@ -71,7 +70,7 @@ static void	handle_mutex_error(int status, t_opcode code)
 		_err("Mutex is locked");
 }
 
-void	_safe_mutex_handle(t_mutex *mtx, t_opcode opcode)
+void	safe_mutex_handle(t_mutex *mtx, t_opcode opcode)
 {
 	if (opcode == LOCK)
 		handle_mutex_error(pthread_mutex_lock(mtx), opcode);

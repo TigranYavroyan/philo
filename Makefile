@@ -13,12 +13,13 @@ INCLPATH = ./includes/
 SRCS = $(wildcard $(SRCSPATH)*.c)
 OBJS = $(patsubst $(SRCSPATH)%.c, $(SRCSPATH)%.o, $(SRCS))
 CFLAGS = $(foreach H, $(INCLPATH), -I$(H)) #-Wall -Wextra -Werror
+EXECFLAGS = -fsanitize=address
 NAME = philo
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	@$(CC) $^ -o $@
+	@$(CC) $(EXECFLAGS) $^ -o $@
 	@echo "$(GREEN) Executable file has been created $(RESET)"
 
 $(SRCSPATH)%.o : $(SRCSPATH)%.c

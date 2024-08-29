@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:37:30 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/07/24 18:47:29 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:08:40 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	philo_init (t_table *table) {
 		table->philos[i].meals_counter = 0;
 		table->philos[i].table = table;
 		init_forks(table->philos + i, table->forks, i);
+		safe_mutex_handle(&table->philos[i].philo_mtx, INIT);
 	}
 }
 
@@ -50,6 +51,7 @@ void	__init__ (t_table* table)
 
 	i = -1;
 	table->end_simulation = false;
+	table->threads_counter = 0;
 	table->all_threads_ready = false;
 	table->philos = _safe_malloc(sizeof(t_philo) * table->philo_nbr);
 	table->forks = _safe_malloc(sizeof(t_fork) * table->philo_nbr);
@@ -59,5 +61,6 @@ void	__init__ (t_table* table)
 		table->forks[i].fork_id = i;
 	}
 	safe_mutex_handle(&table->table_mutex, INIT);
+	safe_mutex_handle(&table->o_mtx, INIT);
 	philo_init(table);
 }

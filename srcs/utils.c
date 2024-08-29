@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 19:07:27 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/27 17:04:04 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:11:33 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_usleep (long usec, t_table *table)
 	long	start;
 
 	start = gettime(MICROSECONDS);
-	while (gettime(MICROSECONDS) - start < usec)// && !simulation_finished(table))
+	while (gettime(MICROSECONDS) - start < usec && !simulation_finished(table))
 		;
 }
 
@@ -40,4 +40,21 @@ void wait_all_threads (t_table *table)
 {
 	while (!get_bool(&table->table_mutex, &table->all_threads_ready))
 		;
+}
+
+bool all_threads_running (t_mutex *mtx, long *threads, long philo_nbr)
+{
+	safe_mutex_handle(mtx, LOCK);
+	if (*threads == philo_nbr)
+		return (true);
+	safe_mutex_handle(mtx, UNLOCK);
+
+	return (false);
+}
+
+void	increase_val (t_mutex *mtx, long* val)
+{
+	safe_mutex_handle(mtx, LOCK);
+	++(*val);
+	safe_mutex_handle(mtx, UNLOCK);
 }

@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:16:29 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/27 15:17:06 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:11:29 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,14 @@ typedef enum e_time_code {
 	MICROSECONDS,
 }			t_time_code;
 
+typedef enum e_print_code {
+	EAT,
+	SLEEP,
+	TAKE_FORK,
+	THINK,
+	DIED,
+}			t_print_code;
+
 typedef struct s_table	t_table;
 typedef pthread_mutex_t	t_mutex;
 typedef void			*(*t_fptr)(void *);
@@ -70,6 +78,7 @@ typedef struct s_philo
 	t_fork				*left_fork;
 	t_fork				*right_fork;
 	pthread_t			th_philo;
+	t_mutex				philo_mtx;
 	t_table				*table;
 }						t_philo;
 
@@ -81,9 +90,12 @@ struct					s_table
 	long				time_to_sleep;
 	long				meals_nbr;
 	long				simulation_start;
+	long				threads_counter;
 	bool				end_simulation;
 	bool				all_threads_ready;
+	pthread_t			monitor;
 	t_mutex				table_mutex;
+	t_mutex				o_mtx;
 	t_fork				*forks;
 	t_philo				*philos;
 };
@@ -127,5 +139,13 @@ void					safe_thread_handle(pthread_t *thread, t_fptr foo,
 void					wait_all_threads(t_table *table);
 long					gettime (t_time_code time_code);
 void					ft_usleep (long usec, t_table *table);
+bool 					all_threads_running (t_mutex *mtx, long *threads, long philo_nbr);
+void					increase_val (t_mutex *mtx, long* val);
+
+// output.c
+void					output_simulation (t_philo* philo, t_print_code print_code);
+
+// monitor.c
+void					*monitor_dinner (void* data);
 
 #endif // PHILO_H

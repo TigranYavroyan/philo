@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 18:34:02 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/29 19:28:43 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:32:26 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	*dinner_simulation(void* data) {
 	philo = (t_philo*)data;
 
 	wait_all_threads(philo->table);
+
+	set_long(&philo->philo_mtx, &philo->last_meal_time, gettime(MILLISECONDS));
 
 	increase_val(&philo->table->table_mutex, &philo->table->threads_counter);
 

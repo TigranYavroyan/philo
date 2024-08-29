@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 18:34:02 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/29 18:08:30 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/29 19:28:43 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	*dinner_simulation(void* data) {
 
 	wait_all_threads(philo->table);
 
-	increase_val(&philo->philo_mtx, &philo->table->threads_counter);
+	increase_val(&philo->table->table_mutex, &philo->table->threads_counter);
 
 	while (!get_bool(&philo->philo_mtx, &philo->is_full) && !simulation_finished(philo->table))
 	{

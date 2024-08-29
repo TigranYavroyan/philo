@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 19:07:27 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/29 18:11:33 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/29 19:30:32 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,12 @@ void wait_all_threads (t_table *table)
 
 bool all_threads_running (t_mutex *mtx, long *threads, long philo_nbr)
 {
+	bool	flag;
+
+	flag = false;
 	safe_mutex_handle(mtx, LOCK);
 	if (*threads == philo_nbr)
-		return (true);
+		flag = true;
 	safe_mutex_handle(mtx, UNLOCK);
 
 	return (false);

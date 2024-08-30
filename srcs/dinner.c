@@ -6,7 +6,7 @@
 /*   By: tigran <tigran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 18:34:02 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/30 13:46:00 by tigran           ###   ########.fr       */
+/*   Updated: 2024/08/30 13:53:50 by tigran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	sleeping (t_philo* philo)
 static void	thinking (t_philo* philo)
 {
 	output_simulation(philo, THINK);
-	// ft_usleep(philo->table->time, philo->table);
 }
 
 void	*alone (void *data)

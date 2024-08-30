@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tigran <tigran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 18:34:02 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/29 20:32:26 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/30 13:46:00 by tigran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	eating (t_philo* philo)
 	safe_mutex_handle(&philo->right_fork->mtx, LOCK);
 	output_simulation(philo, TAKE_FORK);
 
-	output_simulation(philo, EAT);
 	set_long(&philo->philo_mtx, &philo->last_meal_time, gettime(MILLISECONDS));
 	++philo->meals_counter;
+	output_simulation(philo, EAT);
 	ft_usleep(philo->table->time_to_eat, philo->table);
 	if (philo->table->meals_nbr > 0 && philo->meals_counter == philo->table->meals_nbr)
 		set_bool(&philo->philo_mtx, &philo->is_full, true);
@@ -40,6 +40,20 @@ static void	thinking (t_philo* philo)
 {
 	output_simulation(philo, THINK);
 	// ft_usleep(philo->table->time, philo->table);
+}
+
+void	*alone (void *data)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)data;
+	wait_all_threads(philo->table);
+	set_long(&philo->philo_mtx, &philo->last_meal_time, gettime(MILLISECONDS));
+	increase_val(&philo->table->table_mutex, &philo->table->threads_counter);
+	output_simulation(philo, TAKE_FORK);
+	while (!simulation_finished(philo->table))
+		usleep(get_long(&philo->table->table_mutex, &philo->table->time_to_die));
+	return (NULL);
 }
 
 void	*dinner_simulation(void* data) {
@@ -70,7 +84,7 @@ void dinner_start (t_table* table)
 	if (table->meals_nbr == 0)
 		return ;
 	if (table->philo_nbr == 1)
-		;
+		safe_thread_handle(&table->philos[0].th_philo, alone, &table->philos[0], CREATE);
 	else
 	{
 		i = -1;

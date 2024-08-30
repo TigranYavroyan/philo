@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tigran <tigran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 19:07:27 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/29 19:30:32 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/30 13:07:38 by tigran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool all_threads_running (t_mutex *mtx, long *threads, long philo_nbr)
 		flag = true;
 	safe_mutex_handle(mtx, UNLOCK);
 
-	return (false);
+	return (flag);
 }
 
 void	increase_val (t_mutex *mtx, long* val)

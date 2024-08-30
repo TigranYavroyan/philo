@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tigran <tigran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:30:19 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/29 20:33:06 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/30 13:09:17 by tigran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static bool philo_died (t_philo *philo)
 	long	time_to_die;
 
 	if (get_bool(&philo->philo_mtx, &philo->is_full))
-		return false;
+		return (false);
 
-	diff = gettime(MICROSECONDS) - get_long(&philo->philo_mtx, &philo->last_meal_time);
-	time_to_die = philo->table->time_to_die;
-
+	diff = gettime(MILLISECONDS) - get_long(&philo->philo_mtx, &philo->last_meal_time);
+	time_to_die = philo->table->time_to_die / 1e3;
+	
 	if (diff > time_to_die)
 		return (true);
-	return false;
+	return (false);
 }
 
 void	*monitor_dinner (void* data)
@@ -43,8 +43,8 @@ void	*monitor_dinner (void* data)
 		{
 			if (philo_died(table->philos + i))
 			{
-				set_bool(&table->table_mutex, &table->end_simulation, true);
 				output_simulation(table->philos + i, DIED);
+				set_bool(&table->table_mutex, &table->end_simulation, true);
 			}
 		}
 

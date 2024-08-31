@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:16:29 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/31 16:04:55 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/31 16:18:22 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,5 +151,11 @@ void					output_simulation(t_philo *philo,
 
 // monitor.c
 void					*monitor_dinner(void *data);
+
+// routine.c
+void					eating(t_philo *philo);
+void					sleeping(t_philo *philo);
+void					thinking(t_philo *philo);
+void					*alone(void *data);
 
 #endif // PHILO_H

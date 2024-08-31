@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 18:34:02 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/31 16:31:51 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:26:07 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	dinner_start(t_table *table)
 	i = -1;
 	while (++i < table->philo_nbr)
 		safe_thread_handle(&table->philos[i].th_philo, NULL, NULL, JOIN);
-	// table->end_simulation = true;
 	set_bool(&table->table_mutex, &table->end_simulation, true);
 	safe_thread_handle(&table->monitor, NULL, NULL, JOIN);
 }

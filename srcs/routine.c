@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 16:17:06 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/31 17:09:46 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:25:52 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,7 @@ void	sleeping(t_philo *philo)
 
 void	thinking(t_philo *philo)
 {
-// 	long	t_eat;
-// 	long	t_sleep;
-// 	long	t_think;
-
 	output_simulation(philo, THINK);
-	// if (philo->table->philo_nbr % 2 == 0)
-	// 	return ;
-	// t_eat = philo->table->time_to_eat;
-	// t_sleep = philo->table->time_to_sleep;
-	// t_think = (t_eat * 2) - t_sleep;
-	// if (t_think < 0)
-	// 	t_think = 0;
-	// ft_usleep(t_think * 0.42, philo->table);
 }
 
 void	*alone(void *data)

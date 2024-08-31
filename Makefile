@@ -13,7 +13,7 @@ INCLPATH = ./includes/
 SRCS = $(wildcard $(SRCSPATH)*.c)
 OBJS = $(patsubst $(SRCSPATH)%.c, $(SRCSPATH)%.o, $(SRCS))
 CFLAGS = $(foreach H, $(INCLPATH), -I$(H)) #-Wall -Wextra -Werror
-EXECFLAGS = #-fsanitize=address
+EXECFLAGS = #-fsanitize=thread
 NAME = philo
 
 all : $(NAME)

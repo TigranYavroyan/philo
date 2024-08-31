@@ -6,7 +6,7 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:16:29 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/29 18:11:29 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/31 16:04:55 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,20 @@ typedef enum e_opcode
 	DETACH,
 }						t_opcode;
 
-typedef enum e_time_code {
+typedef enum e_time_code
+{
 	MILLISECONDS,
 	MICROSECONDS,
-}			t_time_code;
+}						t_time_code;
 
-typedef enum e_print_code {
+typedef enum e_print_code
+{
 	EAT,
 	SLEEP,
 	TAKE_FORK,
 	THINK,
 	DIED,
-}			t_print_code;
+}						t_print_code;
 
 typedef struct s_table	t_table;
 typedef pthread_mutex_t	t_mutex;
@@ -129,23 +131,25 @@ void					set_long(t_mutex *mutex, long *dest, long val);
 bool					simulation_finished(t_table *table);
 
 // safe functions.c
-void					*__attribute__((malloc,
-								warn_unused_result)) _safe_malloc(size_t bytes);
+void					*_safe_malloc(size_t bytes) __attribute__((malloc,
+								warn_unused_result));
 void					safe_mutex_handle(t_mutex *mtx, t_opcode opcode);
 void					safe_thread_handle(pthread_t *thread, t_fptr foo,
 							void *data, t_opcode code);
 
 // utils.c
 void					wait_all_threads(t_table *table);
-long					gettime (t_time_code time_code);
-void					ft_usleep (long usec, t_table *table);
-bool 					all_threads_running (t_mutex *mtx, long *threads, long philo_nbr);
-void					increase_val (t_mutex *mtx, long* val);
+long					gettime(t_time_code time_code);
+void					ft_usleep(long usec, t_table *table);
+bool					all_threads_running(t_mutex *mtx, long *threads,
+							long philo_nbr);
+void					increase_val(t_mutex *mtx, long *val);
 
 // output.c
-void					output_simulation (t_philo* philo, t_print_code print_code);
+void					output_simulation(t_philo *philo,
+							t_print_code print_code);
 
 // monitor.c
-void					*monitor_dinner (void* data);
+void					*monitor_dinner(void *data);
 
 #endif // PHILO_H

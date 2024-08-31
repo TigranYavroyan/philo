@@ -6,13 +6,13 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:00:33 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/29 17:24:36 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/31 16:08:26 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	output_simulation (t_philo* philo, t_print_code print_code)
+void	output_simulation(t_philo *philo, t_print_code print_code)
 {
 	long	time;
 

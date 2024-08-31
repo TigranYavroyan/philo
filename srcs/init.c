@@ -6,22 +6,21 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:37:30 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/29 18:08:40 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/31 16:08:01 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-static void	init_forks (t_philo* philo, t_fork* forks, int i)
+static void	init_forks(t_philo *philo, t_fork *forks, int i)
 {
 	int	philo_nbr;
 
 	philo_nbr = philo->table->philo_nbr;
-
 	if (philo->id % 2 == 0)
 	{
-		philo->right_fork = &forks[(i + 1) % philo_nbr];
-		philo->left_fork = &forks[i];
+		philo->left_fork = &forks[(i + 1) % philo_nbr];
+		philo->right_fork = &forks[i];
 	}
 	else
 	{
@@ -30,7 +29,8 @@ static void	init_forks (t_philo* philo, t_fork* forks, int i)
 	}
 }
 
-static void	philo_init (t_table *table) {
+static void	philo_init(t_table *table)
+{
 	int	i;
 
 	i = -1;
@@ -45,7 +45,7 @@ static void	philo_init (t_table *table) {
 	}
 }
 
-void	__init__ (t_table* table)
+void	__init__(t_table *table)
 {
 	int	i;
 

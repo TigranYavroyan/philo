@@ -6,13 +6,13 @@
 /*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:37:42 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/07/24 18:36:30 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/08/31 16:09:32 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void *_safe_malloc(size_t bytes)
+void	*_safe_malloc(size_t bytes)
 {
 	void	*ret;
 
@@ -34,10 +34,10 @@ static void	handle_thread_error(int status, t_opcode code)
 		_err("The value specified by thread is not joinable\n");
 	else if (ESRCH == status)
 		_err("No thread could be found corresponding to that specified by"
-				"the given threa d ID, thread.");
+			"the given threa d ID, thread.");
 	else if (EDEADLK == status)
 		_err("A deadlock was detected or the value of thread specifies"
-				"the calling thread.");
+			"the calling thread.");
 }
 
 void	safe_thread_handle(pthread_t *thread, t_fptr foo, void *data,
@@ -61,11 +61,12 @@ static void	handle_mutex_error(int status, t_opcode code)
 		_err("The value specified by attr is invalid.");
 	else if (EDEADLK == status)
 		_err("A deadlock could occur if the thread "
-				"blocked waiting for mutex.");
+			"blocked waiting for mutex.");
 	else if (EPERM == status)
 		_err("The current thread does not hold a lock on mutex.");
 	else if (ENOMEM == status)
-		_err("The process cannot allocate enough memory to create another mutex.");
+		_err("The process cannot allocate enough memory to \
+			create another mutex.");
 	else if (EBUSY == status)
 		_err("Mutex is locked");
 }

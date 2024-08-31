@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigran <tigran@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 19:07:27 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/30 13:07:38 by tigran           ###   ########.fr       */
+/*   Updated: 2024/08/31 16:07:50 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-long	gettime (t_time_code time_code)
+long	gettime(t_time_code time_code)
 {
-	struct timeval tv;
+	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL))
 		_err("Get time failed");
@@ -27,7 +27,7 @@ long	gettime (t_time_code time_code)
 	return (42);
 }
 
-void	ft_usleep (long usec, t_table *table)
+void	ft_usleep(long usec, t_table *table)
 {
 	long	start;
 
@@ -36,13 +36,13 @@ void	ft_usleep (long usec, t_table *table)
 		;
 }
 
-void wait_all_threads (t_table *table)
+void	wait_all_threads(t_table *table)
 {
 	while (!get_bool(&table->table_mutex, &table->all_threads_ready))
 		;
 }
 
-bool all_threads_running (t_mutex *mtx, long *threads, long philo_nbr)
+bool	all_threads_running(t_mutex *mtx, long *threads, long philo_nbr)
 {
 	bool	flag;
 
@@ -51,11 +51,10 @@ bool all_threads_running (t_mutex *mtx, long *threads, long philo_nbr)
 	if (*threads == philo_nbr)
 		flag = true;
 	safe_mutex_handle(mtx, UNLOCK);
-
 	return (flag);
 }
 
-void	increase_val (t_mutex *mtx, long* val)
+void	increase_val(t_mutex *mtx, long *val)
 {
 	safe_mutex_handle(mtx, LOCK);
 	++(*val);

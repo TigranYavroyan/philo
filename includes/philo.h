@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tigran <tigran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:16:29 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/31 16:18:22 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/09/11 00:09:55 by tigran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,9 @@ struct					s_table
 };
 
 // init.c
-void					__init__(t_table *table);
+bool					__init__(t_table *table);
 
 // exit.c
-void					_err(const char *msg);
 void					_dealloc(t_table *table);
 
 // helpers.c
@@ -117,11 +116,11 @@ void					print_with_color(const char *msg, const char *color);
 
 // parsing.c
 long					ft_atol(const char *str);
-void					parse(t_table *table, char **argv);
+bool					parse(t_table *table, char **argv);
 
 // dinner.c
 void					*dinner_simulation(void *data);
-void					dinner_start(t_table *table);
+bool					dinner_start(t_table *table);
 
 // get_set.c
 bool					get_bool(t_mutex *mutex, bool *val);
@@ -131,10 +130,8 @@ void					set_long(t_mutex *mutex, long *dest, long val);
 bool					simulation_finished(t_table *table);
 
 // safe functions.c
-void					*_safe_malloc(size_t bytes) __attribute__((malloc,
-								warn_unused_result));
-void					safe_mutex_handle(t_mutex *mtx, t_opcode opcode);
-void					safe_thread_handle(pthread_t *thread, t_fptr foo,
+bool					safe_mutex_handle(t_mutex *mtx, t_opcode opcode);
+bool					safe_thread_handle(pthread_t *thread, t_fptr foo,
 							void *data, t_opcode code);
 
 // utils.c

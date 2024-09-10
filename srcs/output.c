@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tigran <tigran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:00:33 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/31 16:08:26 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/09/11 00:10:30 by tigran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	output_simulation(t_philo *philo, t_print_code print_code)
 			printf("%ld %d is thinking\n", time, philo->id);
 		else if (print_code == DIED)
 			printf("%ld %d died\n", time, philo->id);
-		else
-			_err("Invalid opcode for output simulation");
 	}
 	safe_mutex_handle(&philo->table->o_mtx, UNLOCK);
 }

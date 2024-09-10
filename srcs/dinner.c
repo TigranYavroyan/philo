@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tigran <tigran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 18:34:02 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/31 18:26:07 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/09/11 00:09:17 by tigran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,33 @@ void	*dinner_simulation(void *data)
 	return (NULL);
 }
 
-void	dinner_start(t_table *table)
+bool	dinner_start(t_table *table)
 {
 	int	i;
 
 	if (table->meals_nbr == 0)
-		return ;
-	if (table->philo_nbr == 1)
-		safe_thread_handle(&table->philos[0].th_philo, alone, &table->philos[0],
-			CREATE);
+		return (true);
+	if (table->philo_nbr == 1) {
+		if (!safe_thread_handle(&table->philos[0].th_philo, alone, &table->philos[0],
+			CREATE));
+			return (false);
+	}
 	else
 	{
 		i = -1;
 		while (++i < table->philo_nbr)
-			safe_thread_handle(&table->philos[i].th_philo, dinner_simulation,
-				&table->philos[i], CREATE);
+			if (!safe_thread_handle(&table->philos[i].th_philo, dinner_simulation,
+				&table->philos[i], CREATE))
+				return (false);
 	}
 	table->simulation_start = gettime(MILLISECONDS);
 	set_bool(&table->table_mutex, &table->all_threads_ready, true);
-	safe_thread_handle(&table->monitor, monitor_dinner, table, CREATE);
+	if (!safe_thread_handle(&table->monitor, monitor_dinner, table, CREATE))
+		return (false);
 	i = -1;
 	while (++i < table->philo_nbr)
-		safe_thread_handle(&table->philos[i].th_philo, NULL, NULL, JOIN);
+		if (!safe_thread_handle(&table->philos[i].th_philo, NULL, NULL, JOIN))
+			return (false);
 	set_bool(&table->table_mutex, &table->end_simulation, true);
-	safe_thread_handle(&table->monitor, NULL, NULL, JOIN);
+	return (safe_thread_handle(&table->monitor, NULL, NULL, JOIN));
 }

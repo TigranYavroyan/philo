@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tigran <tigran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 19:07:27 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/31 16:07:50 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/09/11 00:11:24 by tigran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,11 @@ long	gettime(t_time_code time_code)
 {
 	struct timeval	tv;
 
-	if (gettimeofday(&tv, NULL))
-		_err("Get time failed");
+	gettimeofday(&tv, NULL);
 	if (time_code == MILLISECONDS)
 		return ((tv.tv_usec / 1e3) + (tv.tv_sec * 1e3));
 	if (time_code == MICROSECONDS)
 		return (tv.tv_usec + (tv.tv_sec * 1e6));
-	else
-		_err("Wrong input to gettime()");
 	return (42);
 }
 

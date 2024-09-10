@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tigran <tigran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 20:24:14 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/08/31 16:34:37 by tyavroya         ###   ########.fr       */
+/*   Updated: 2024/09/11 00:10:07 by tigran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,4 @@ void	_dealloc(t_table *table)
 	safe_mutex_handle(&table->table_mutex, DESTROY);
 	free(table->forks);
 	free(table->philos);
-}
-
-void	_err(const char *msg)
-{
-	print_with_color(msg, RED);
-	exit(EXIT_FAILURE);
 }

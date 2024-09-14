@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe_funcs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigran <tigran@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tyavroya <tyavroya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:37:42 by tyavroya          #+#    #+#             */
-/*   Updated: 2024/09/10 23:44:28 by tigran           ###   ########.fr       */
+/*   Updated: 2024/09/14 18:37:24 by tyavroya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ bool	safe_thread_handle(pthread_t *thread, t_fptr foo, void *data,
 		t_opcode code)
 {
 	if (CREATE == code)
-		return (handle_thread_error(pthread_create(thread, NULL, foo, data), code));
+		return (handle_thread_error(pthread_create(thread, NULL, foo, data),
+				code));
 	else if (JOIN == code)
 		return (handle_thread_error(pthread_join(*thread, NULL), code));
 	else if (DETACH == code)
 		return (handle_thread_error(pthread_detach(*thread), code));
 	else
 		return (false);
-
 }
 
 static bool	handle_mutex_error(int status, t_opcode code)
